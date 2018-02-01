@@ -20,6 +20,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
     compile files('libs/slugs-api-1.0.0.jar')
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.13.0'
 }
 
 jacoco {

@@ -13,7 +13,7 @@ public class BetPlacer {
         */
 
         // Note that the names of today’s races change every day!
-        new BetPlacer().placeBet(3, "The Monday race", new BigDecimal("0.50"));
+        new BetPlacer().placeBet(3, "The Thursday race", new BigDecimal("0.50"));
     }
 
     public void placeBet(int slugId, String raceName, BigDecimal targetOdds) {
