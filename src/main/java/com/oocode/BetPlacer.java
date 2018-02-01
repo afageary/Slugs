@@ -30,18 +30,28 @@ public class BetPlacer {
 
     public void placeBet(int slugId, String raceName, BigDecimal targetOdds) {
         String result;
+        long quotationTime = System.currentTimeMillis();
         Race race = slugSwapsApi.forRace(raceName);
         if (race == null) {
             result = null;
         } else {
             result = race.quote(slugId, targetOdds);
+            quotationTime = System.currentTimeMillis();
         }
         String p2p = result;
         Quote b = slugRacingOddsApi.on(slugId, raceName);
         if (p2p != null && targetOdds.compareTo(b.odds) >= 0) {
-            try {
-                slugSwapsApi.accept(p2p);
-            } catch (SlugSwaps.Timeout timeout) {
+            if(quotationTime + 1000L > System.currentTimeMillis()) {
+                try {
+                    slugSwapsApi.accept(p2p);
+                } catch (SlugSwaps.Timeout timeout) {
+                    if (b.odds.compareTo(targetOdds) == 0)
+                        slugRacingOddsApi.agree(b.uid);
+                }
+            }
+            else {
+                if (b.odds.compareTo(targetOdds) == 0)
+                    slugRacingOddsApi.agree(b.uid);
             }
         } else {
             if (b.odds.compareTo(targetOdds) >= 0) {
