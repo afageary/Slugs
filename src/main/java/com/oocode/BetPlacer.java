@@ -5,6 +5,18 @@ import com.teamoptimization.*;
 import java.math.BigDecimal;
 
 public class BetPlacer {
+
+    SlugSwapsApi slugSwapsApi;
+    SlugRacingOddsApi slugRacingOddsApi;
+
+    BetPlacer(SlugSwapsApi slugSwapsApi, SlugRacingOddsApi slugRacingOddsApi) {
+        this.slugSwapsApi = slugSwapsApi;
+        this.slugRacingOddsApi = slugRacingOddsApi;
+    }
+    BetPlacer() {
+        slugSwapsApi = new SlugSwapsApi();
+        slugRacingOddsApi = new SlugRacingOddsApi();
+    }
     public static void main(String[] args) throws Exception {
         /* Results usually look like a bit like one of the following:
            Time out on SlugSwaps
@@ -18,22 +30,22 @@ public class BetPlacer {
 
     public void placeBet(int slugId, String raceName, BigDecimal targetOdds) {
         String result;
-        Race race = SlugSwapsApi.forRace(raceName);
+        Race race = slugSwapsApi.forRace(raceName);
         if (race == null) {
             result = null;
         } else {
             result = race.quote(slugId, targetOdds);
         }
         String p2p = result;
-        Quote b = SlugRacingOddsApi.on(slugId, raceName);
+        Quote b = slugRacingOddsApi.on(slugId, raceName);
         if (p2p != null && targetOdds.compareTo(b.odds) >= 0) {
             try {
-                SlugSwapsApi.accept(p2p);
+                slugSwapsApi.accept(p2p);
             } catch (SlugSwaps.Timeout timeout) {
             }
         } else {
             if (b.odds.compareTo(targetOdds) >= 0) {
-                SlugRacingOddsApi.agree(b.uid);
+                slugRacingOddsApi.agree(b.uid);
             }
         }
     }
