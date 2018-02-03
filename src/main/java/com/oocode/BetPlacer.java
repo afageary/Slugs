@@ -1,21 +1,19 @@
 package com.oocode;
 
-import com.teamoptimization.*;
-
 import java.math.BigDecimal;
 
 public class BetPlacer {
 
-    SlugSwapsApi slugSwapsApi;
-    SlugRacingOddsApi slugRacingOddsApi;
+    DelegateProvider cheapProvider;
+    DelegateProvider expensiveProvider;
 
-    BetPlacer(SlugSwapsApi slugSwapsApi, SlugRacingOddsApi slugRacingOddsApi) {
-        this.slugSwapsApi = slugSwapsApi;
-        this.slugRacingOddsApi = slugRacingOddsApi;
+    BetPlacer(DelegateProvider cheapProvider, DelegateProvider expensiveProvider) {
+        this.cheapProvider = cheapProvider;
+        this.expensiveProvider = expensiveProvider;
     }
     BetPlacer() {
-        slugSwapsApi = new SlugSwapsApi();
-        slugRacingOddsApi = new SlugRacingOddsApi();
+        cheapProvider = new CheaperProvider();
+        expensiveProvider = new expensiveProvider();
     }
     public static void main(String[] args) throws Exception {
         /* Results usually look like a bit like one of the following:
@@ -25,37 +23,25 @@ public class BetPlacer {
         */
 
         // Note that the names of today’s races change every day!
-        new BetPlacer().placeBet(3, "The Thursday race", new BigDecimal("0.50"));
+        new BetPlacer().placeBet(3, "The Saturday race", new BigDecimal("0.50"));
     }
 
     public void placeBet(int slugId, String raceName, BigDecimal targetOdds) {
-        String result;
-        long quotationTime = System.currentTimeMillis();
-        Race race = slugSwapsApi.forRace(raceName);
-        if (race == null) {
-            result = null;
-        } else {
-            result = race.quote(slugId, targetOdds);
-            quotationTime = System.currentTimeMillis();
-        }
-        String p2p = result;
-        Quote b = slugRacingOddsApi.on(slugId, raceName);
-        if (p2p != null && targetOdds.compareTo(b.odds) >= 0) {
-            if(quotationTime + 1000L > System.currentTimeMillis()) {
-                try {
-                    slugSwapsApi.accept(p2p);
-                } catch (SlugSwaps.Timeout timeout) {
-                    if (b.odds.compareTo(targetOdds) == 0)
-                        slugRacingOddsApi.agree(b.uid);
-                }
+
+        String a = cheapProvider.quote(slugId, raceName, targetOdds);
+        String b = expensiveProvider.quote(slugId, raceName, targetOdds);
+        if (a != null && targetOdds.compareTo(expensiveProvider.getOdds()) >= 0) {
+            if(cheapProvider.getQuotationTime() + 1000L > System.currentTimeMillis()) {
+                cheapProvider.accept(a);
             }
             else {
-                if (b.odds.compareTo(targetOdds) == 0)
-                    slugRacingOddsApi.agree(b.uid);
+                if (expensiveProvider.getOdds().compareTo(targetOdds) == 0) {
+                    expensiveProvider.accept(b);
+                }
             }
         } else {
-            if (b.odds.compareTo(targetOdds) >= 0) {
-                slugRacingOddsApi.agree(b.uid);
+            if (expensiveProvider.getOdds().compareTo(targetOdds) > 0) {
+                expensiveProvider.accept(b);
             }
         }
     }
