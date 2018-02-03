@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 
 class CheaperProvider implements DelegateProvider {
 
-    long quotationTime;
-    BigDecimal odds;
+    private long quotationTime;
+    private BigDecimal odds;
 
     @Override
     public String  quote(int slugId, String raceName, BigDecimal targetOdds) {

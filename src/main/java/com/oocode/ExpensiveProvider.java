@@ -5,10 +5,10 @@ import com.teamoptimization.SlugRacingOddsApi;
 
 import java.math.BigDecimal;
 
-public class expensiveProvider implements DelegateProvider {
+public class ExpensiveProvider implements DelegateProvider {
 
-    long quotationTime;
-    BigDecimal odds;
+    private long quotationTime;
+    private BigDecimal odds;
 
     @Override
     public String  quote(int slugId, String raceName, BigDecimal targetOdds) {

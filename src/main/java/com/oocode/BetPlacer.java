@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public class BetPlacer {
 
-    DelegateProvider cheapProvider;
-    DelegateProvider expensiveProvider;
+    private DelegateProvider cheapProvider;
+    private DelegateProvider expensiveProvider;
 
     BetPlacer(DelegateProvider cheapProvider, DelegateProvider expensiveProvider) {
         this.cheapProvider = cheapProvider;
@@ -13,7 +13,7 @@ public class BetPlacer {
     }
     BetPlacer() {
         cheapProvider = new CheaperProvider();
-        expensiveProvider = new expensiveProvider();
+        expensiveProvider = new ExpensiveProvider();
     }
     public static void main(String[] args) throws Exception {
         /* Results usually look like a bit like one of the following:
@@ -30,17 +30,16 @@ public class BetPlacer {
 
         String a = cheapProvider.quote(slugId, raceName, targetOdds);
         String b = expensiveProvider.quote(slugId, raceName, targetOdds);
-        if (a != null && targetOdds.compareTo(expensiveProvider.getOdds()) >= 0) {
+        if ( a != null && targetOdds.compareTo(expensiveProvider.getOdds()) >= 0) {
             if(cheapProvider.getQuotationTime() + 1000L > System.currentTimeMillis()) {
                 cheapProvider.accept(a);
-            }
-            else {
+            } else {
                 if (expensiveProvider.getOdds().compareTo(targetOdds) == 0) {
                     expensiveProvider.accept(b);
                 }
             }
         } else {
-            if (expensiveProvider.getOdds().compareTo(targetOdds) > 0) {
+            if (expensiveProvider.getOdds().compareTo(targetOdds) >= 0) {
                 expensiveProvider.accept(b);
             }
         }
