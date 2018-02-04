@@ -26,10 +26,11 @@ class CheaperProvider implements DelegateProvider {
     }
 
    @Override
-    public void accept(String quote) {
+    public void accept(String quote)  {
         try {
             SlugSwapsApi.accept(quote);
         } catch (SlugSwaps.Timeout timeout) {
+            throw new OfferTimeOutException("Cheaper Provider accept method timed-out", timeout);
         }
     }
 
@@ -41,5 +42,14 @@ class CheaperProvider implements DelegateProvider {
     @Override
     public BigDecimal getOdds() {
         return this.odds;
+    }
+
+    class OfferTimeOutException extends RuntimeException {
+        Exception error;
+        OfferTimeOutException(String msg, Exception e) {
+            super(msg);
+            this.error = e;
+        }
+        OfferTimeOutException() {}
     }
 }

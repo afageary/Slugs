@@ -6,12 +6,14 @@ public class BetPlacer {
 
     private DelegateProvider cheapProvider;
     private DelegateProvider expensiveProvider;
+    boolean acceptTimedOut;
 
     BetPlacer(DelegateProvider cheapProvider, DelegateProvider expensiveProvider) {
         this.cheapProvider = cheapProvider;
         this.expensiveProvider = expensiveProvider;
+        this.acceptTimedOut = false;
     }
-    BetPlacer() {
+    public BetPlacer() {
         cheapProvider = new CheaperProvider();
         expensiveProvider = new ExpensiveProvider();
     }
@@ -23,25 +25,29 @@ public class BetPlacer {
         */
 
         // Note that the names of today’s races change every day!
-        new BetPlacer().placeBet(3, "The Saturday race", new BigDecimal("0.50"));
+        new BetPlacer().placeBet(3, "The Sunday race", new BigDecimal("0.50"));
     }
 
-    public void placeBet(int slugId, String raceName, BigDecimal targetOdds) {
+    public void placeBet(int slugId, String raceName, BigDecimal targetOdds)  {
 
         String a = cheapProvider.quote(slugId, raceName, targetOdds);
         String b = expensiveProvider.quote(slugId, raceName, targetOdds);
         if ( a != null && targetOdds.compareTo(expensiveProvider.getOdds()) >= 0) {
             if(cheapProvider.getQuotationTime() + 1000L > System.currentTimeMillis()) {
-                cheapProvider.accept(a);
-            } else {
-                if (expensiveProvider.getOdds().compareTo(targetOdds) == 0) {
-                    expensiveProvider.accept(b);
+                try {
+                    cheapProvider.accept(a);
+                } catch (CheaperProvider.OfferTimeOutException e) {
+                    if (expensiveProvider.getOdds().compareTo(targetOdds) == 0) {
+                        expensiveProvider.accept(b);
+                    }
+                    e.getStackTrace();
+                    acceptTimedOut = true;
                 }
-            }
-        } else {
-            if (expensiveProvider.getOdds().compareTo(targetOdds) >= 0) {
+            } else if (expensiveProvider.getOdds().compareTo(targetOdds) == 0) {
                 expensiveProvider.accept(b);
             }
+        } else if (expensiveProvider.getOdds().compareTo(targetOdds) >= 0) {
+            expensiveProvider.accept(b);
         }
     }
 }
