@@ -2,7 +2,7 @@ package com.oocode;
 
 import java.math.BigDecimal;
 
-public interface DelegateProvider {
+public interface BetProvider {
 
     String  quote(int slugId, String raceName, BigDecimal targetOdds);
 

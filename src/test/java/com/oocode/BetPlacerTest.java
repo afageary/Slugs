@@ -18,8 +18,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.60");
@@ -44,8 +44,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.59");
@@ -69,8 +69,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.61");
@@ -94,8 +94,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = null;
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.60");
@@ -119,8 +119,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = null;
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.53");
@@ -144,8 +144,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.50");
@@ -168,8 +168,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.60");
@@ -194,8 +194,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
 
         BigDecimal offeredOdds = new BigDecimal("0.53");
@@ -220,8 +220,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
         CheaperProvider exceptionWrapper = new CheaperProvider();
 
@@ -249,8 +249,8 @@ public class BetPlacerTest {
         String cheaperProviderQuote = "ffaaa0c7-18e6-4bae-b4c1-7eabf3222f02";
         String expensiveProviderQuote = "7c7b0857-88e5-4fc1-aeea-bef815995ef3";
 
-        DelegateProvider cheaperProvider = mock(CheaperProvider.class);
-        DelegateProvider expensiveProvider = mock(ExpensiveProvider.class);
+        BetProvider cheaperProvider = mock(CheaperProvider.class);
+        BetProvider expensiveProvider = mock(ExpensiveProvider.class);
         BetPlacer betPlacer = new BetPlacer(cheaperProvider, expensiveProvider);
         CheaperProvider exceptionWrapper = new CheaperProvider();
 

@@ -6,7 +6,7 @@ import com.teamoptimization.SlugSwapsApi;
 
 import java.math.BigDecimal;
 
-class CheaperProvider implements DelegateProvider {
+class CheaperProvider implements BetProvider {
 
     private long quotationTime;
     private BigDecimal odds;

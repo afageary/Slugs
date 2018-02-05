@@ -5,7 +5,7 @@ import com.teamoptimization.SlugRacingOddsApi;
 
 import java.math.BigDecimal;
 
-public class ExpensiveProvider implements DelegateProvider {
+public class ExpensiveProvider implements BetProvider {
 
     private long quotationTime;
     private BigDecimal odds;
