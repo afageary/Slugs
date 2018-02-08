@@ -26,6 +26,7 @@ public class ExpensiveProvider implements BetProvider {
     public long getQuotationTime() {
         return this.quotationTime;
     }
+    
     @Override
     public BigDecimal getOdds() {
         return this.odds;
