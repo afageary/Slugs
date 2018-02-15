@@ -13,16 +13,14 @@ class CheaperProvider implements BetProvider {
 
     @Override
     public String  quote(int slugId, String raceName, BigDecimal targetOdds) {
-        String result;
         this.odds = targetOdds;
         Race race = SlugSwapsApi.forRace(raceName);
         if (race == null) {
-            result = null;
+            return null;
         } else {
-            result = race.quote(slugId, targetOdds);
             this.quotationTime = System.currentTimeMillis();
+            return race.quote(slugId, targetOdds);
         }
-        return result;
     }
 
    @Override
